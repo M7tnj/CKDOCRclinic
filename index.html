@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CKD Survival Portal — 500-patient chronic kidney disease cohort</title>
+  <meta name="description" content="Multi-page portal for a 500-patient chronic kidney disease cohort: register patients, explore and export data, live statistics, and survival predictions from five learning models." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    // Apply saved theme before first paint to avoid a flash
+    (function () {
+      var saved = localStorage.getItem("ckd-theme");
+      var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (dark) document.documentElement.classList.add("dark");
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#page">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell">
+      <div class="header-row">
+        <a class="brand" href="#/overview" aria-label="Go to overview">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </span>
+          <span class="brand-text">
+            <span class="brand-title">CKD Survival Portal</span>
+            <span class="brand-sub">500-patient chronic kidney disease cohort · 5 survival models</span>
+          </span>
+        </a>
+        <div class="header-actions">
+          <span class="pill pill-badge">Attention NN · C-index 0.925</span>
+          <button id="theme-toggle" class="btn btn-ghost btn-icon" type="button" aria-label="Toggle light / dark theme" title="Toggle theme">
+            <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </button>
+        </div>
+      </div>
+      <nav id="nav" class="nav" aria-label="Portal pages"></nav>
+    </div>
+  </header>
+
+  <main id="page" class="shell page-root" aria-live="polite">
+    <div class="page-loading">
+      <div class="skeleton sk-title"></div>
+      <div class="skeleton sk-line"></div>
+      <div class="skeleton sk-block"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <p>Cohort: Patient Data.xlsx (CKD-0001–0500) · Models: Cox PH, Random Survival Forest, Gradient Boosting, Neural Network, Attention NN</p>
+      <p>Research demonstrator — not for clinical decision-making.</p>
+    </div>
+  </footer>
+
+  <div id="dialog-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <noscript><div class="shell"><p class="noscript-note">This portal needs JavaScript — please enable it and reload.</p></div></noscript>
+
+  <script src="js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
